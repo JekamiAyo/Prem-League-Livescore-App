@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
+import '../apikey.dart';
 import '../model/livescore.dart';
 import '../model/settled_matches.dart';
 import '../model/upcoming_matches.dart';
@@ -14,7 +15,7 @@ class LiveScoreApi {
     String url =
         'https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all&league=39&season=$formatter';
     const headers = {
-      'x-rapidapi-key': "15104a897cmsh4c08fe94ae48868p1cfa4fjsn9c42dfc5dd0f",
+      'x-rapidapi-key': apikey,
       'x-rapidapi-host': "api-football-v1.p.rapidapi.com"
     };
 
@@ -41,7 +42,7 @@ class LiveScoreApi {
     String url =
         "https://api-football-v1.p.rapidapi.com/v3/fixtures?league=39&season=$formatter&status=FT";
     const headers = {
-      'x-rapidapi-key': "15104a897cmsh4c08fe94ae48868p1cfa4fjsn9c42dfc5dd0f",
+      'x-rapidapi-key': apikey,
       'x-rapidapi-host': "api-football-v1.p.rapidapi.com"
     };
 
@@ -60,14 +61,15 @@ class LiveScoreApi {
     }
     return null;
   }
-    Future<UpcomingMatches?> getUpcomingMatches() async {
+
+  Future<UpcomingMatches?> getUpcomingMatches() async {
     final now = DateTime.now();
     String formatter = DateFormat('y').format(now);
 
     String url =
         "https://api-football-v1.p.rapidapi.com/v3/fixtures?league=39&season=$formatter&status=NS";
     const headers = {
-      'x-rapidapi-key': "15104a897cmsh4c08fe94ae48868p1cfa4fjsn9c42dfc5dd0f",
+      'x-rapidapi-key': apikey,
       'x-rapidapi-host': "api-football-v1.p.rapidapi.com"
     };
 
