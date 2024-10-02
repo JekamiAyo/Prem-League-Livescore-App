@@ -2,15 +2,8 @@
 
 A new Flutter project.
 
-## Getting Started
+## Screenshots
 
-This project is a starting point for a Flutter application.
+<img src="https://github.com/user-attachments/assets/2ea54a0b-aa64-4702-8c4a-d6be2f922392" alt="Simulator Screenshot - iPhone 15 Pro - 2024-10-02 at 18 54 50" width="220" height="500">
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://github.com/user-attachments/assets/de1e2542-0bda-442e-97fa-cb32702a686c" alt="Simulator Screenshot - iPhone 15 Pro - 2024-09-19 at 01 53 08" width="220" height="500">
