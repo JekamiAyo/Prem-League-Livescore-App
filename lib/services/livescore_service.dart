@@ -22,18 +22,21 @@ class LiveScoreApi {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final cachedData = prefs.getString('live_matches');
+    final cachedTimestamp = prefs.getInt('live_matches_timestamp');
 
-    // Return cached data if available
-    if (cachedData != null) {
-      return liveScoreFromJson(cachedData);
+    // Cache expiration logic (5 minutes)
+    if (cachedData != null && cachedTimestamp != null &&
+        DateTime.now().millisecondsSinceEpoch - cachedTimestamp < 5 * 60 * 1000) {
+      return liveScoreFromJson(cachedData); // Use cached data if still valid
     }
 
     try {
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200) {
         var jsonBody = response.body;
-        // Cache the response
+        // Cache the response and timestamp
         prefs.setString('live_matches', jsonBody);
+        prefs.setInt('live_matches_timestamp', DateTime.now().millisecondsSinceEpoch);
         return liveScoreFromJson(jsonBody);
       }
     } catch (e) {
@@ -57,18 +60,21 @@ class LiveScoreApi {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final cachedData = prefs.getString('settled_matches');
+    final cachedTimestamp = prefs.getInt('settled_matches_timestamp');
 
-    // Return cached data if available
-    if (cachedData != null) {
-      return matchFromJson(cachedData);
+    // Cache expiration logic (5 minutes)
+    if (cachedData != null && cachedTimestamp != null &&
+        DateTime.now().millisecondsSinceEpoch - cachedTimestamp < 5 * 60 * 1000) {
+      return matchFromJson(cachedData); // Use cached data if still valid
     }
 
     try {
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200) {
         var jsonBody = response.body;
-        // Cache the response
+        // Cache the response and timestamp
         prefs.setString('settled_matches', jsonBody);
+        prefs.setInt('settled_matches_timestamp', DateTime.now().millisecondsSinceEpoch);
         return matchFromJson(jsonBody);
       }
     } catch (e) {
@@ -92,18 +98,21 @@ class LiveScoreApi {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final cachedData = prefs.getString('upcoming_matches');
+    final cachedTimestamp = prefs.getInt('upcoming_matches_timestamp');
 
-    // Return cached data if available
-    if (cachedData != null) {
-      return upcomingMatchesFromJson(cachedData);
+    // Cache expiration logic (5 minutes)
+    if (cachedData != null && cachedTimestamp != null &&
+        DateTime.now().millisecondsSinceEpoch - cachedTimestamp < 5 * 60 * 1000) {
+      return upcomingMatchesFromJson(cachedData); // Use cached data if still valid
     }
 
     try {
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200) {
         var jsonBody = response.body;
-        // Cache the response
+        // Cache the response and timestamp
         prefs.setString('upcoming_matches', jsonBody);
+        prefs.setInt('upcoming_matches_timestamp', DateTime.now().millisecondsSinceEpoch);
         return upcomingMatchesFromJson(jsonBody);
       }
     } catch (e) {
