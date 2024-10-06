@@ -1,1 +1,1 @@
-const apikey = "https://github.com/JekamiAyo/Prem-League-Livescore-App.git";
+const apikey = "15104a897cmsh4c08fe94ae48868p1cfa4fjsn9c42dfc5dd0f";
