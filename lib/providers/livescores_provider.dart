@@ -4,18 +4,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'dart:async';
 part 'livescores_provider.g.dart';
 
-// @riverpod
-// Future<LiveScore?> liveScore(ref) async {
-//   final liveScoreApi = LiveScoreApi();
-//   return await liveScoreApi.getLiveMatches();
-// }
-
 @riverpod
 class LiveScoreNotifier extends _$LiveScoreNotifier {
   Timer? _timer;
   final Duration _fetchInterval = const Duration(seconds: 30);
   final liveScoreApi = LiveScoreApi();
-
 
   @override
   Future<LiveScore?> build() async {
@@ -25,8 +18,8 @@ class LiveScoreNotifier extends _$LiveScoreNotifier {
 
   void _startPeriodicFetch() {
     _timer = Timer.periodic(_fetchInterval, (timer) async {
-      final newData = await liveScoreApi.getLiveMatches(); 
-      state =  AsyncValue.data(newData);
+      final newData = await liveScoreApi.getLiveMatches();
+      state = AsyncValue.data(newData);
     });
   }
 

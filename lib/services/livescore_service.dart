@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../apikey.dart';
 import '../model/livescore.dart';
@@ -19,17 +20,25 @@ class LiveScoreApi {
       'x-rapidapi-host': "api-football-v1.p.rapidapi.com"
     };
 
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final cachedData = prefs.getString('live_matches');
+
+    // Return cached data if available
+    if (cachedData != null) {
+      return liveScoreFromJson(cachedData);
+    }
+
     try {
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200) {
         var jsonBody = response.body;
+        // Cache the response
+        prefs.setString('live_matches', jsonBody);
         return liveScoreFromJson(jsonBody);
       }
     } catch (e) {
       if (kDebugMode) {
-        print(
-          e.toString(),
-        );
+        print(e.toString());
       }
     }
     return null;
@@ -46,17 +55,25 @@ class LiveScoreApi {
       'x-rapidapi-host': "api-football-v1.p.rapidapi.com"
     };
 
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final cachedData = prefs.getString('settled_matches');
+
+    // Return cached data if available
+    if (cachedData != null) {
+      return matchFromJson(cachedData);
+    }
+
     try {
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200) {
         var jsonBody = response.body;
+        // Cache the response
+        prefs.setString('settled_matches', jsonBody);
         return matchFromJson(jsonBody);
       }
     } catch (e) {
       if (kDebugMode) {
-        print(
-          e.toString(),
-        );
+        print(e.toString());
       }
     }
     return null;
@@ -73,17 +90,25 @@ class LiveScoreApi {
       'x-rapidapi-host': "api-football-v1.p.rapidapi.com"
     };
 
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final cachedData = prefs.getString('upcoming_matches');
+
+    // Return cached data if available
+    if (cachedData != null) {
+      return upcomingMatchesFromJson(cachedData);
+    }
+
     try {
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200) {
         var jsonBody = response.body;
+        // Cache the response
+        prefs.setString('upcoming_matches', jsonBody);
         return upcomingMatchesFromJson(jsonBody);
       }
     } catch (e) {
       if (kDebugMode) {
-        print(
-          e.toString(),
-        );
+        print(e.toString());
       }
     }
     return null;

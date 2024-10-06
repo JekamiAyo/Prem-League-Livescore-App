@@ -2,15 +2,8 @@ import 'package:livescore/model/upcoming_matches.dart';
 import 'package:livescore/services/livescore_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'dart:async';
-
 import '../model/settled_matches.dart';
 part 'match_provider.g.dart';
-
-// @riverpod
-// Future<LiveScore?> liveScore(ref) async {
-//   final liveScoreApi = LiveScoreApi();
-//   return await liveScoreApi.getLiveMatches();
-// }
 
 @riverpod
 class SettledMatchesNotifier extends _$SettledMatchesNotifier {
