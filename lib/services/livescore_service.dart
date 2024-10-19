@@ -24,9 +24,9 @@ class LiveScoreApi {
     final cachedData = prefs.getString('live_matches');
     final cachedTimestamp = prefs.getInt('live_matches_timestamp');
 
-    // Cache expiration logic (30 seconds)
+    // Cache expiration logic (3 seconds)
     if (cachedData != null && cachedTimestamp != null &&
-        DateTime.now().millisecondsSinceEpoch - cachedTimestamp < 2 * 1000) {
+        DateTime.now().millisecondsSinceEpoch - cachedTimestamp < 3 * 1000) {
       return liveScoreFromJson(cachedData); // Use cached data if still valid
     }
 
@@ -62,9 +62,9 @@ class LiveScoreApi {
     final cachedData = prefs.getString('settled_matches');
     final cachedTimestamp = prefs.getInt('settled_matches_timestamp');
 
-    // Cache expiration logic (30 seconds)
+    // Cache expiration logic (2 minutes)
     if (cachedData != null && cachedTimestamp != null &&
-        DateTime.now().millisecondsSinceEpoch - cachedTimestamp < 30 * 1000) {
+        DateTime.now().millisecondsSinceEpoch - cachedTimestamp< 2 * 60 * 1000) {
       return matchFromJson(cachedData); // Use cached data if still valid
     }
 
@@ -100,9 +100,9 @@ class LiveScoreApi {
     final cachedData = prefs.getString('upcoming_matches');
     final cachedTimestamp = prefs.getInt('upcoming_matches_timestamp');
 
-    // Cache expiration logic (30 seconds)
+    // Cache expiration logic (2 minutes)
     if (cachedData != null && cachedTimestamp != null &&
-        DateTime.now().millisecondsSinceEpoch - cachedTimestamp < 30 * 1000) {
+        DateTime.now().millisecondsSinceEpoch - cachedTimestamp < 2 * 60 * 1000) {
       return upcomingMatchesFromJson(cachedData); // Use cached data if still valid
     }
 
