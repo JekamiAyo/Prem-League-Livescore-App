@@ -104,7 +104,7 @@ class Body extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10.0),
           child: SizedBox(
             height: 220,
-            child: liveScores != null
+            child: liveScores!.isNotEmpty == true
                 ? ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: liveScores!.length,
